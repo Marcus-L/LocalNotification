@@ -43,6 +43,8 @@ public class ClickActivity extends AbstractClickActivity {
              launchApp();
          }
 
+        if (notification.getOptions().isOngoing())
+            return;
 
         if (notification.isRepeating()) {
             notification.clear();

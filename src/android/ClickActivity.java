@@ -45,24 +45,22 @@ public class ClickActivity extends de.appplant.cordova.plugin.notification.Click
 
         super.onClick(notification);
 
-        if (notification.getOptions().isOngoing())
-            return;
-
-        String event = notification.isRepeating() ? "clear" : "cancel";
-
         if(actionIdentifier != null) {
             LocalNotification.fireEvent("action", notification, actionIdentifier);
+        } else {
+            LocalNotification.fireEvent("click", notification);
 
+            if (notification.getOptions().isOngoing())
+                return;
+            
+            String event = notification.isRepeating() ? "clear" : "cancel";
             if(event == "clear") {
                 notification.clear();
             } else {
                 notification.cancel();
             }
-        } else {
-            LocalNotification.fireEvent("click", notification);
+            LocalNotification.fireEvent(event, notification);
         }
-
-        LocalNotification.fireEvent(event, notification);
     }
 
     /**
