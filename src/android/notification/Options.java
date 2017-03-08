@@ -231,6 +231,13 @@ public class Options {
     public Boolean isAutoClear() {
         return options.optBoolean("autoClear", false);
     }
+    
+    /**
+     * Whether or not this notification is only relevant to the current device.
+     */
+    public boolean isLocalOnly() {
+        return options.optBoolean("localOnly", false);
+    }
 
     /**
      * ID for the local notification as a number.
