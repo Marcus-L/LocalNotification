@@ -321,15 +321,17 @@ class AssetUtil {
      */
     int getResIdForDrawable(String clsName, String resPath) {
         String drawable = getBaseName(resPath);
-        int resId = 0;
+        try {
+            Class<?> cls  = Class.forName(clsName + ".R$mipmap");
+            return (Integer) cls.getDeclaredField(drawable).get(Integer.class);
+        } catch (Exception ignore) {}
 
         try {
             Class<?> cls  = Class.forName(clsName + ".R$drawable");
-
-            resId = (Integer) cls.getDeclaredField(drawable).get(Integer.class);
+            return (Integer) cls.getDeclaredField(drawable).get(Integer.class);
         } catch (Exception ignore) {}
 
-        return resId;
+        return 0;
     }
 
     /**
