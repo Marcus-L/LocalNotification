@@ -42,7 +42,8 @@ exports._defaults = {
     data:  undefined,
     every: undefined,
     at:    undefined,
-    openApp: true
+    openApp: true,
+    localOnly: false
 };
 
 // listener
